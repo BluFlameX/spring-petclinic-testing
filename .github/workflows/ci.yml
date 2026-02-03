@@ -1,0 +1,16 @@
+name: "Workflow file to run maven commands"
+
+on:
+    push:  
+        branches:
+            - main
+jobs:
+    mvn-build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Checkout repo"
+              uses: actions/checkout@v4
+            
+            - name: "Mvn commands"
+              run: mvn clean compile test
+
