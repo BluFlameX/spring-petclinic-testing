@@ -13,14 +13,14 @@ jobs:
             - name: checkout repo
               uses: actions/checkout@v5
             - name: run maven clean
-              run: "mvn clean compile"
+              run: "mvn clean"
             - name: print github attributes
-              run: "echo ${{github.repository}} and ${{github.actor}}"
+              run: echo ${{github.repository}} and ${{github.actor}}
             - name: printing contexts
               run: |
-               - "echo ${{toJson(github)}}"
-                 "echo ${{toJson(runner)}}"
-                 "echo ${{toJson(env)}}"
+               - echo ${{toJson(github)}}
+                 echo ${{toJson(runner)}}
+                 echo ${{toJson(env)}}
               
 
 
