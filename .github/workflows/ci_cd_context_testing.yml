@@ -18,10 +18,11 @@ jobs:
               run: echo ${{github.repository}} and ${{github.actor}}
             - name: printing contexts
               run: |
-               - echo ${{toJson(github)}}
+                 echo ${{toJson(github)}}
                  echo ${{toJson(runner)}}
                  echo ${{toJson(env)}}
               
+
 
 
 
