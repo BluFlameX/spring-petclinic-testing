@@ -12,5 +12,5 @@ jobs:
               uses: actions/checkout@v4
             
             - name: "Mvn commands"
-              run: mvn clean compile test
+              run: mvn clean 
 

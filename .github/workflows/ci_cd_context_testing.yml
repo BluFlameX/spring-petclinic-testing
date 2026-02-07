@@ -1,0 +1,14 @@
+name: Testing context and properties in Yaml
+
+on:
+    push:
+        branches:
+            - main
+jobs:
+    ctx-test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+            - name: repo check
+              run: "echo ${{github.repository}} "
+
