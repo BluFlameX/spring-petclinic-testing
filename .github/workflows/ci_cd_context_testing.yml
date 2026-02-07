@@ -6,8 +6,11 @@ on:
             - main
     workflow_dispatch:
 
+env:
+    global_env_var: This variable is declared at worflow level
+
 jobs:
-    job_1:
+    exploring_contexts:
         runs-on: ubuntu-latest
         steps:
             - name: checkout repo
@@ -22,6 +25,25 @@ jobs:
                  echo '${{toJson(github)}}'
                  echo '${{toJson(runner)}}'
                  echo '${{toJson(env)}}'
+            - name: printing global env var
+              run: echo ${{env.global_env_var}}
+
+    exploring_env_variables:
+        runs-on: ubuntu-latest
+        env:
+            job_level_env: This is declared at job level
+        steps:
+            - name: Printing global var
+              env:
+                    step_env: This is declared at step level
+              run: |
+
+                echo ${{env.global_env_var}}
+                echo ${{env.step_env}}
+            
+            - name: Printing job level var
+              run: echo ${{ env.job_level_env }}
+            
 
 
 
