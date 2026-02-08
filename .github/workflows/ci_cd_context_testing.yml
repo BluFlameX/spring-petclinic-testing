@@ -1,49 +1,38 @@
 name: Testing context, properties and variables
 
 on:
-    push:
-        branches:
-            - main
-    workflow_dispatch:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 env:
-    global_env_var: This variable is declared at worflow level
+  global_var: This is global variable
 
 jobs:
-    exploring_contexts:
-        runs-on: ubuntu-latest
-        steps:
-            - name: checkout repo
-              uses: actions/checkout@v5
-            - name: run maven clean
-              run: "mvn clean"
-            - name: print github attributes
-              run: echo ${{github.repository}} and ${{github.actor}}
-            - name: printing contexts
-              run: |
-
-                 echo '${{toJson(github)}}'
-                 echo '${{toJson(runner)}}'
-                 echo '${{toJson(env)}}'
-            - name: printing global env var
-              run: echo ${{env.global_env_var}}
-
-    exploring_env_variables:
-        runs-on: ubuntu-latest
-        env:
-            job_level_env: This is declared at job level
-        steps:
-            - name: Printing global var
-              env:
-                    step_env: This is declared at step level
-              run: |
-
-                echo ${{env.global_env_var}}
-                echo ${{env.step_env}}
-            
-            - name: Printing job level var
-              run: echo ${{ env.job_level_env }}
-            
+  exploring_contexts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v5
+      - name: printing github info
+        run: |
+             echo '${{toJson(github)}}'
+             echo '${{toJson(runner)}}'
+      - name: printing github repo name 
+        run: echo ${{github.repository}}
+      - name: printing github repo actor
+        run: echo ${{github.actor}}
+  
+  exploring_variables:
+    runs-on: ubuntu-latest
+    env: 
+      exploring_variables_var: This var belongs to exploring variables job
+    steps:
+      - name: just printing local varaible
+        run: echo ${{env.exploring_variables_var}}
+      - name: printing global variable
+        run: echo ${{env.global_var}}
 
 
 
