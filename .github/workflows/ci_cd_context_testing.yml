@@ -33,6 +33,8 @@ jobs:
         run: echo ${{env.exploring_variables_var}}
       - name: printing global variable
         run: echo ${{env.global_var}}
+      - name: printing group name
+        run: echo ${{vars.GROUP_NAME}}
 
 
 
