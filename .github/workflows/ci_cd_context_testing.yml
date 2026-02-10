@@ -7,11 +7,14 @@ on:
 
   workflow_dispatch:
 
+env:
+  global_env_var: Global level env variable
+
 jobs:
   context_exploration:
     runs-on: ubuntu-latest
     env:
-      global_env_var: Global env variable, will be used while printing
+      job_env_var: Job level env variable, will be used while printing
     steps:
       - name: checkout code onto the runner
         uses: actions/checkout@v5
@@ -19,6 +22,8 @@ jobs:
         run: echo ${{github.repository}}
       - name: printing github actor context
         run: echo ${{github.actor}}
+      - name: Printing job env var
+        run: echo ${{env.job_env_var}}
     
   installing_and_compiling_maven:
       runs-on: ubuntu-latest
