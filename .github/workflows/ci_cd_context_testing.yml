@@ -5,6 +5,8 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+
 jobs:
   context_exploration:
     runs-on: ubuntu-latest
@@ -12,7 +14,7 @@ jobs:
       global_env_var: Global env variable, will be used while printing
     steps:
       - name: checkout code onto the runner
-        uses: actions\checkout@v5
+        uses: actions/checkout@v5
       - name: printing repository context
         run: echo ${{github.repository}}
       - name: printing github actor context
@@ -22,7 +24,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: actual repo checkout
-          uses: actions\checkout@v5
+          uses: actions/checkout@v5
         - name: Cleaning target package
           run: mvn clean
         - name: compiling the code
