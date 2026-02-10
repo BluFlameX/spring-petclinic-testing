@@ -1,42 +1,38 @@
-name: Testing context, properties and variables
+name: Trying contexts and variables
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
-
-env:
-  global_var: This is global variable
 
 jobs:
-  exploring_contexts:
+  context_exploration:
     runs-on: ubuntu-latest
+    env:
+      global_env_var: Global env variable, will be used while printing
     steps:
-      - name: checkout code
-        uses: actions/checkout@v5
-      - name: printing github info
-        run: |
-             echo '${{toJson(github)}}'
-             echo '${{toJson(runner)}}'
-      - name: printing github repo name 
+      - name: checkout code onto the runner
+        uses: actions\checkout@v5
+      - name: printing repository context
         run: echo ${{github.repository}}
-      - name: printing github repo actor
+      - name: printing github actor context
         run: echo ${{github.actor}}
-  
+    
+  installing_and_compiling_maven:
+      runs-on: ubuntu-latest
+      steps:
+        - name: actual repo checkout
+          uses: actions\checkout@v5
+        - name: Cleaning target package
+          run: mvn clean
+        - name: compiling the code
+          run: mvn compile
+
   exploring_variables:
-    runs-on: ubuntu-latest
-    env: 
-      exploring_variables_var: This var belongs to exploring variables job
-    steps:
-      - name: just printing local varaible
-        run: echo ${{env.exploring_variables_var}}
-      - name: printing global variable
-        run: echo ${{env.global_var}}
-      - name: printing group name
-        run: echo ${{vars.GROUP_NAME}}
-
-
-
-
-
+      runs-on: ubuntu-latest
+      steps:
+        - name: printing global variable
+          run: echo ${{env.global_env_var}}
+        - name: printing vars goal variable
+          run: echo ${{vars.GOAL}}
+        
